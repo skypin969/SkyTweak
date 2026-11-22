@@ -1,79 +1,80 @@
 SKYTWEAK v9.6.9
 Author: Skypin969 (Telegram: @Skypin969)
-Untuk: KernelSU Next
-Profil: seimbang
+For: KernelSU Next
+Profile: balanced (seimbang)
 
 
-APA ISINYA
-----------
-Modul ini menerapkan beberapa pengaturan kernel dan Android setiap HP menyala.
-Nilai memori diambil dari profil balance KTweak.
+WHAT IT DOES
+------------
+This module applies several kernel and Android tweaks every time the phone boots.
+Memory values are taken from the balance profile of KTweak.
 
-1. Memori
-   Mengatur seberapa sering sistem memindahkan data ke swap dan kapan data
-   di memori ditulis ke penyimpanan.
+1. Memory
+   Controls how often the system moves data to swap, and when dirty memory
+   is written to storage.
 
-2. Penyimpanan
-   Menaikkan batas ukuran satu permintaan baca/tulis ke disk utama, dari
-   512 KB menjadi 768 KB (nilai bawaan HP uji).
+2. Storage
+   Raises the maximum size of one read/write request to the main disk, from
+   512 KB to 768 KB (default on the test device).
 
-3. Jaringan
-   Koneksi TCP tidak lagi "mulai pelan dari nol" setiap kali sempat diam.
-   Berguna saat berselancar yang sering berhenti lalu lanjut lagi.
+3. Network
+   TCP connections no longer restart from slow start after a short idle
+   period. Helpful when browsing, where traffic starts and stops often.
 
-4. Aplikasi di layar depan
-   Menaikkan batas bawah tenaga CPU untuk aplikasi yang sedang dibuka
-   (uclamp top-app) dari 12,5 persen menjadi 15 persen.
+4. Foreground apps
+   Raises the minimum CPU boost for the app in the foreground (uclamp top-app)
+   from 12.5 percent to 15 percent.
 
 
-YANG TIDAK DIUBAH
+WHAT IT DOES NOT CHANGE
+-----------------------
+- CPU governor and CPU scheduler stay at their defaults.
+- TCP buffer sizes stay at their defaults.
+- No battery-saving feature is included. That is in the SAVER BY SKYPIN
+  module. The two modules are not related and work independently.
+
+
+INSTALLATION
+------------
+1. In KernelSU Next, open Modules, then Install from storage.
+2. Select the file SkyTweak-v9.6.9.zip.
+3. Wait until it finishes, then restart the phone.
+
+
+CHANGING SETTINGS
 -----------------
-- Governor dan penjadwal CPU tetap bawaan.
-- Buffer TCP tetap bawaan.
-- Tidak ada fitur hemat baterai. Fitur itu ada di modul SAVER BY SKYPIN.
-  Kedua modul tidak saling terkait dan bekerja masing-masing.
+1. Open the file /data/adb/skytweak/config.txt. You need a file manager with
+   root access, or Termux with su.
+2. Edit the values. The format is key=value with no spaces. Lines starting
+   with # are ignored.
+3. Save, then restart the phone.
+
+The config is kept when the module is updated, so your changes are not lost.
 
 
-CARA PASANG
------------
-1. Buka KernelSU Next, lalu Modules, lalu Install from storage.
-2. Pilih file SkyTweak-v9.6.9.zip.
-3. Tunggu sampai selesai, lalu restart HP.
+READING THE LOG
+---------------
+Open /data/adb/skytweak/log.txt. Each line has one of these statuses (the
+log text itself is in Indonesian):
+- OK: the setting was written. The value read back afterwards is also logged.
+- LEWAT (skipped): the setting does not exist on this phone, so it was skipped.
+- GAGAL (failed): the system rejected the value.
+The previous boot's log is kept in log.txt.old.
 
 
-CARA MENGUBAH PENGATURAN
-------------------------
-1. Buka file /data/adb/skytweak/config.txt. Perlu aplikasi file manager
-   dengan akses root, atau Termux dengan su.
-2. Ubah nilainya. Formatnya kunci=nilai, tanpa spasi. Baris yang diawali
-   tanda # diabaikan.
-3. Simpan, lalu restart HP.
-
-Config tetap dipakai saat modul diperbarui, jadi perubahan Anda tidak hilang.
+UNINSTALLING AND TURNING OFF
+----------------------------
+- Temporarily: disable the module in KernelSU Next, then restart the phone.
+- Remove: remove the module in KernelSU Next, then restart the phone. The
+  folder /data/adb/skytweak (config and log) is deleted too.
 
 
-CARA MELIHAT LOG
-----------------
-Buka /data/adb/skytweak/log.txt. Setiap baris berisi salah satu status ini:
-- OK: pengaturan berhasil ditulis. Nilai yang terbaca setelahnya ikut dicatat.
-- LEWAT: pengaturan tidak ada di HP ini, jadi dilewati.
-- GAGAL: sistem menolak nilai tersebut.
-Log boot sebelumnya disimpan di log.txt.old.
-
-
-CARA MEMBATALKAN
-----------------
-- Sementara: matikan modul di KernelSU Next, lalu restart HP.
-- Hapus: hapus modul di KernelSU Next, lalu restart HP. Folder
-  /data/adb/skytweak (config dan log) ikut terhapus.
-
-
-CATATAN
--------
-- Nilai tidak disimpan permanen. Setiap boot, modul menerapkannya lagi.
-- Sebagian nilai bisa diubah Android saat HP dipakai. Itu bukan kesalahan
-  modul. Cek log untuk melihat nilai yang sebenarnya terbaca.
-- Modul ini tidak bisa memperbaiki kecepatan unduh yang turun karena sinyal
-  atau kondisi jaringan.
-- Sebelum dipakai lebih luas, uji dulu di HP Anda dan periksa log setelah
-  restart.
+NOTES
+-----
+- Values are not saved permanently. On every boot, the module applies them again.
+- Android may change some values while the phone is in use. This is not a
+  module error. Check the log to see the values actually read.
+- This module cannot fix download speed drops caused by signal or network
+  conditions.
+- Before using it more widely, test it on your own device and check the log
+  after a restart.
