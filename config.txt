@@ -1,0 +1,26 @@
+# SkyTweak - config.txt
+# Format: kunci=nilai, tanpa spasi.
+# Baris yang diawali tanda # diabaikan.
+# Setelah diubah, restart HP agar berlaku.
+
+# Nama profil (hanya dicatat di log)
+profile=seimbang
+
+# Memori
+vm.swappiness=100
+vm.vfs_cache_pressure=100
+vm.dirty_ratio=30
+vm.dirty_background_ratio=10
+vm.dirty_expire_centisecs=3000
+vm.dirty_writeback_centisecs=3000
+vm.page-cluster=0
+vm.stat_interval=10
+
+# Penyimpanan: batas ukuran satu permintaan baca/tulis, dalam KB
+queue.max_sectors_kb=768
+
+# Jaringan
+net.ipv4.tcp_slow_start_after_idle=0
+
+# Aplikasi di layar depan: batas bawah uclamp top-app, dalam persen
+uclamp.top_app.min=15
